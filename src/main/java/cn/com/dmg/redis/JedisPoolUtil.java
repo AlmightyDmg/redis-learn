@@ -12,6 +12,11 @@ public class JedisPoolUtil {
   
   public static JedisPool getJedisPoolInstance()
  {
+     /**
+      * 判断两次空
+      *     1.第一次判断，若不为空，直接不用进synchronized，大大提高效率
+      *     2.第二次判断，若锁上之前，被new了，则不会再被new
+      */
      if(null == jedisPool)
     {
        synchronized (JedisPoolUtil.class)
